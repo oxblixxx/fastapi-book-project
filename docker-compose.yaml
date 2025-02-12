@@ -1,21 +1,41 @@
+version: "3.8"
+
 services:
   app:
     image: fastapi-app
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: fastapi-app
-    expose:
-      - "8000"
+    container_name: fastapi-app-compose
+    ports:
+      - "8000:8000"
     environment:
       - PORT=8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]  # Adjust health endpoint as needed
+      interval: 30s
+      retries: 3
+    networks:
+      app-network:
+        ipv4_address: 172.18.0.10  # Assign static IP address
+    depends_on:
+      - nginx
 
   nginx:
     image: nginx:latest
     container_name: fastapi-nginx
     ports:
-      - "80:80"
+      - "81:80"  # Expose Nginx on port 81 externally
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.18.0.0/16"  # Define a subnet for the custom network
