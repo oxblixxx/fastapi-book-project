@@ -31,3 +31,8 @@ jobs:
       - name: Deploy Docker container
         run: |
           docker run -d -p 8000:8000 --name fastapi-app fastapi-app
+
+# 
+      # - name: Build and deploy with Docker Compose
+      #   run: |
+      #     docker-compose up -d
