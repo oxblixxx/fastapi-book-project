@@ -19,6 +19,10 @@ jobs:
         with:
           python-version: "3.9"
 
+      - name: Check for syntax errors
+        run: |
+          python -m py_compile main.py api/**/*.py tests/**/*.py
+
       - name: Create and activate virtual environment
         run: |
           python -m venv venv
