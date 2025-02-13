@@ -42,7 +42,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /home/tunde/fast-deploy
+            cd /home/oxblixxx/fast-deploy
             echo "hello world" >> test.txt
             git clone https://github.com/oxblixxx/fastapi-book-project.git || true
             cd fastapi-book-project
