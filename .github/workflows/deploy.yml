@@ -48,9 +48,9 @@ jobs:
             cd fastapi-book-project
 
             # Set up Python virtual environment
-            python3 -m venv venv
-            source venv/bin/activate
-            pip install -r requirements.txt
+            # python3 -m venv venv
+            # source venv/bin/activate
+            # pip install -r requirements.txt
 
             # Create Docker network (ignore error if it already exists)
             docker network create --subnet=192.168.1.0/24 fastapi || true
