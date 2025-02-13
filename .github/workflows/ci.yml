@@ -25,3 +25,44 @@ jobs:
 
       - name: Run tests
         run: pytest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /var/www/fastapi
+            git clone https://github.com/oxblixxx/fastapi-book-project.git || true
+            cd fastapi-book-project
+
+            # Set up Python virtual environment
+            python3 -m venv venv
+            source venv/bin/activate
+            pip install -r requirements.txt
+
+            # Create Docker network (ignore error if it already exists)
+            docker network create --subnet=192.168.1.0/24 fastapi || true
+
+            # Build and run FastAPI container
+            docker build -t fastapi-app .
+            docker run -d --name fastapi-app --net fastapi --ip 192.168.1.100 -p 8000:8000 fastapi-app
+
+            # Move Nginx configuration file
+            mv /var/www/fastapi/nginx-config /etc/nginx/sites-available/fastapi
+
+            # Create a symbolic link
+            ln -sf /etc/nginx/sites-available/fastapi /etc/nginx/sites-enabled/
+
+            # Test and restart Nginx
+            nginx -t && systemctl restart nginx
