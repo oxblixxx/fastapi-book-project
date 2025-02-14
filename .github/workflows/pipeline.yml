@@ -59,7 +59,8 @@ jobs:
 
             # Build and run FastAPI container
             docker build -t fastapi-app .
-            docker run -d --name fastapi-app --net fastapi --ip 192.168.1.100 -p 8000:8000 fastapi-app
+            docker build -t fastapi-app . && docker run -p 8000:8000 fastapi-app
+            #docker run -d --name fastapi-app --net fastapi --ip 192.168.1.100 -p 8000:8000 fastapi-app
 
             # Update Nginx configuration
             sudo -A cp /home/oxblixxx/fast-deploy/fastapi-book-project/fast-api /etc/nginx/sites-available/fast-api
