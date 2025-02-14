@@ -59,5 +59,6 @@ jobs:
             docker build -t fastapi-app .
             docker run -d --name fastapi-app --net fastapi --ip 192.168.1.100 -p 8000:8000 fastapi-app
             chmod +x script.sh
+            ./script.sh
             # Test and restart Nginx
             nginx -t && systemctl restart nginx
