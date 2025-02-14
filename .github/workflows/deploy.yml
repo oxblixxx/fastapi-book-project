@@ -17,7 +17,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            sudo mkdir -p fastapi-book-project
             cd fastapi-book-project
             git stash
             git pull origin main
