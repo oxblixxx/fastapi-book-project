@@ -43,6 +43,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             set -x
+            export SUDO_ASKPASS="/usr/local/bin/askpass.sh"
             cd /home/oxblixxx/fast-deploy
             echo "hello world" >> test.txt
             git clone https://github.com/oxblixxx/fastapi-book-project.git || true
