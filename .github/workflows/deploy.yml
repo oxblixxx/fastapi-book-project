@@ -17,27 +17,12 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            set -x  # Enable debugging
-
-            # Navigate to the project directory
-            mkdir -p /home/oxblixxx/fastapi-book-project
-            cd /home/oxblixxx/fastapi-book-project
-
-            # Fetch and reset to the latest code from the main branch
+            mkdir -p fastapi-book-project
+            cd fastapi-book-project
+            git pull origin main
             git fetch origin main
             git reset --hard origin/main
-
-            # Stop existing containers (if any)
+            # Stop existing containers
             docker-compose down || true
-
-            # Rebuild and restart Docker containers
             docker-compose up -d --build
-
-            # Check the status of the containers
             docker ps
-
-            # Test the /stage2 endpoint
-            curl -I http://localhost:8000/api/stage2 || echo "Endpoint /stage2 is not available"
-
-            # Check Docker logs for errors
-            docker-compose logs fastapi-app
