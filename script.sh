@@ -4,3 +4,5 @@ sudo cp /home/oxblixxx/fast-deploy/fastapi-book-project/fast-api /etc/nginx/site
 
   # Create a symbolic link
 sudo ln -sf /etc/nginx/sites-available/fast-api /etc/nginx/sites-enabled/
+
+##change permision
