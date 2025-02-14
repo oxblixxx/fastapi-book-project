@@ -1,4 +1,3 @@
-# Use an official lightweight Python image
 FROM python:3.9-slim
 
 # Set the working directory
@@ -17,4 +16,4 @@ COPY . .
 EXPOSE 8000
 
 # Set the entry point
-#CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000", "main:app"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
