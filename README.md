@@ -144,3 +144,145 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Support
 
 For support, please open an issue in the GitHub repository.
+
+FastAPI Book Project
+This is a FastAPI-based project for managing books. It includes a RESTful API for creating, reading, updating, and deleting books. The project is containerized using Docker and deployed using a CI/CD pipeline with GitHub Actions.
+
+Table of Contents
+Features
+
+Prerequisites
+
+Setup
+
+Local Development
+
+Docker Setup
+
+Running Tests
+
+CI/CD Pipeline
+
+Deployment
+
+API Documentation
+
+Contributing
+
+License
+
+Features
+RESTful API: CRUD operations for managing books.
+
+Dockerized: Easy to deploy using Docker.
+
+CI/CD Pipeline: Automated testing and deployment using GitHub Actions.
+
+Nginx Reverse Proxy: Nginx is used as a reverse proxy for the FastAPI application.
+
+Prerequisites
+Before you begin, ensure you have the following installed:
+
+Python 3.9
+
+Docker
+
+Docker Compose (optional, for local development)
+
+Git
+
+Nginx (on the deployment server)
+
+Setup
+Local Development
+Clone the repository:
+
+bash
+Copy
+git clone https://github.com/oxblixxx/fastapi-book-project.git
+cd fastapi-book-project
+Set up a virtual environment:
+
+bash
+Copy
+python3 -m venv venv
+source venv/bin/activate
+Install dependencies:
+
+bash
+Copy
+pip install -r requirements.txt
+Run the application:
+
+bash
+Copy
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+Access the API:
+Open your browser or use a tool like curl or Postman to access the API at http://localhost:8000.
+
+Docker Setup
+Build the Docker image:
+
+bash
+Copy
+docker build -t fastapi-app .
+Run the Docker container:
+
+bash
+Copy
+docker run -d --name fastapi-app -p 8000:8000 fastapi-app
+Access the API:
+The API will be available at http://localhost:8000.
+
+Running Tests
+To run the tests locally:
+
+Install test dependencies:
+
+bash
+Copy
+pip install -r requirements.txt
+Run pytest:
+
+bash
+Copy
+pytest
+CI/CD Pipeline
+The project uses GitHub Actions for CI/CD. The pipeline consists of two jobs:
+
+Test Job:
+
+Runs on pull requests to the main branch.
+
+Executes pytest to ensure all tests pass.
+
+Deploy Job:
+
+Runs on pushes to the main branch (after a pull request is merged).
+
+Deploys the application to the server using Docker and updates Nginx.
+
+Deployment
+Server Setup
+Install Docker:
+Follow the official Docker installation guide for your server's operating system.
+
+Install Nginx:
+Install Nginx and configure it to act as a reverse proxy for the FastAPI application.
+
+Set up SSH Access:
+Ensure the server is accessible via SSH and the necessary secrets (SSH_HOST, SSH_USER, SSH_KEY, SSH_PORT) are configured in the GitHub repository.
+
+Deployment Process
+Merge a Pull Request:
+When a pull request is merged into the main branch, the deploy job is triggered.
+
+Automatic Deployment:
+The deploy job:
+
+Builds and runs the Docker container.
+
+Updates the Nginx configuration and restarts Nginx.
+
+Access the Deployed Application:
+The application will be available at your server's domain or IP address.
