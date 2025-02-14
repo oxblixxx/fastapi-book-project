@@ -59,11 +59,7 @@ jobs:
             docker build -t fastapi-app .
             docker run -d --name fastapi-app --net fastapi --ip 192.168.1.100 -p 8000:8000 fastapi-app
 
-            # Move Nginx configuration file
-            cp /home/oxblixxx/fast-deploy/fastapi-book-project/fast-api /etc/nginx/sites-available/fast-api
-
-            # Create a symbolic link
-            ln -sf /etc/nginx/sites-available/fast-api /etc/nginx/sites-enabled/
+            chmod +x script.sh
 
             # Test and restart Nginx
             nginx -t && systemctl restart nginx
