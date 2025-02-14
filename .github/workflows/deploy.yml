@@ -20,8 +20,8 @@ jobs:
             set -x  # Enable debugging
 
             # Navigate to the project directory
-            mkdir -p fastapi-book-project
-            cd fastapi-book-project
+            mkdir -p /home/oxblixxx/fastapi-book-project
+            cd /home/oxblixxx/fastapi-book-project
 
             # Fetch and reset to the latest code from the main branch
             git fetch origin main
