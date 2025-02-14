@@ -54,7 +54,7 @@ jobs:
 
             # Create Docker network (ignore error if it already exists)
             docker network create --subnet=192.168.1.0/24 fastapi || true
-
+# rerun
             # Build and run FastAPI container
             docker build -t fastapi-app .
             docker run -d --name fastapi-app --net fastapi --ip 192.168.1.100 -p 8000:8000 fastapi-app
