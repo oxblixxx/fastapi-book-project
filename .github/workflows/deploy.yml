@@ -19,10 +19,11 @@ jobs:
           script: |
             mkdir -p fastapi-book-project
             cd fastapi-book-project
+            git clone https://github.com/oxblixxx/fastapi-book-project.git
             git pull origin main
             git fetch origin main
             git reset --hard origin/main
             # Stop existing containers
-            docker-compose down || true
+            docker-compose down
             docker-compose up -d --build
             docker ps
