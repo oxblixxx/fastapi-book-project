@@ -1,12 +1,10 @@
-version: "3.8"
-
 services:
   app:
     image: fastapi-app
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: fastapi-app-compose
+    container_name: fastappi-nginx
     ports:
       - "8000:8000"
     environment:
@@ -18,8 +16,8 @@ services:
     networks:
       app-network:
         ipv4_address: 172.18.0.10  # Assign static IP address
-    depends_on:
-      - nginx
+#    depends_on:
+#      - nginx
 
   nginx:
     image: nginx:latest
@@ -27,7 +25,7 @@ services:
     ports:
       - "81:80"  # Expose Nginx on port 81 externally
     volumes:
-      - ./fast-api.conf:/etc/nginx/nginx.conf
+      - ./fast-api.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - app
     networks:
